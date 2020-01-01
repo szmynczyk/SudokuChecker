@@ -7,25 +7,26 @@ namespace SudokuChecker
     {
         static void Main(string[] args)
         {
-            var sampleTable = new int[,] {
-                { 4,3,5, 2,6,9, 7,8,1 },
-                { 6,8,2, 5,7,1, 4,9,3 },
-                { 1,9,7, 8,3,4, 5,6,2 },
+            char[][] sampleTable = new char[9][]
+            {
+                new char[9] { '4','3','5', '2','6','1', '7','8','1' },
+                new char[9] { '6','8','2', '5','7','9', '4','9','3' },
+                new char[9] { '1','9','7', '8','3','4', '5','6','2' },
 
-                { 8,2,6, 1,9,5, 3,4,7 },
-                { 3,7,4, 6,8,2, 9,1,5 },
-                { 9,5,1, 7,4,3, 6,2,8 },
-
-                { 5,1,9, 3,2,6, 8,7,4 },
-                { 2,4,8, 9,5,7, 1,3,6 },
-                { 7,6,3, 4,1,8, 2,5,9 },
+                new char[9] { '8','2','6', '1','9','5', '3','4','7' },
+                new char[9] { '3','7','4', '6','8','2', '9','1','5' },
+                new char[9] { '9','5','1', '7','4','3', '6','2','8' },
+                         
+                new char[9] { '5','1','9', '3','2','6', '8','7','4' },
+                new char[9] { '2','4','8', '9','5','7', '1','3','6' },
+                new char[9] { '7','6','3', '4','1','8', '2','5','9' },
             };
 
             Console.WriteLine("Squares valid: " + AreSquaresValid(sampleTable));
             Console.WriteLine("Rows and columns valid: " + AreRowsAndColumnsValid(sampleTable));
         }
 
-        private static bool AreRowsAndColumnsValid(int[,] sampleTable)
+        private static bool AreRowsAndColumnsValid(char[][] sampleTable)
         {
             for (int i = 0; i < 9; i++)
             {
@@ -34,7 +35,10 @@ namespace SudokuChecker
 
                 for (int j = 0; j < 9; j++)
                 {
-                    if (!hashRow.Add(sampleTable[i, j]) || !hashColumn.Add(sampleTable[j, i]))
+                    if (sampleTable[i][j] != '.' 
+                        && (!hashRow.Add(sampleTable[i][j]) 
+                            || !hashColumn.Add(sampleTable[j][i])))
+
                         return false;
                 }
             }
@@ -42,7 +46,7 @@ namespace SudokuChecker
             return true;
         }
 
-        private static bool AreSquaresValid(int[,] sampleTable)
+        private static bool AreSquaresValid(char[][] sampleTable)
         {
             for (int columnMultipl = 0; columnMultipl < 3; columnMultipl++)
             {
@@ -54,7 +58,9 @@ namespace SudokuChecker
                     {
                         for (int j = 0 + 3 * columnMultipl; j < 3 + 3 * columnMultipl; j++)
                         {
-                            if (!squareHash.Add(sampleTable[i, j]))
+                            if (sampleTable[i][j] != '.' 
+                                && (!squareHash.Add(sampleTable[i][j])))
+
                                 return false;
                         }
                     }
