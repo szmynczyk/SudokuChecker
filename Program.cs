@@ -35,10 +35,7 @@ namespace SudokuChecker
 
                 for (int j = 0; j < 9; j++)
                 {
-                    if (sampleTable[i][j] != '.' 
-                        && (!hashRow.Add(sampleTable[i][j]) 
-                            || !hashColumn.Add(sampleTable[j][i])))
-
+                    if (sampleTable[i][j] != '.' && (!hashRow.Add(sampleTable[i][j]) || !hashColumn.Add(sampleTable[j][i])))
                         return false;
                 }
             }
@@ -58,9 +55,7 @@ namespace SudokuChecker
                     {
                         for (int j = 0 + 3 * columnMultipl; j < 3 + 3 * columnMultipl; j++)
                         {
-                            if (sampleTable[i][j] != '.' 
-                                && (!squareHash.Add(sampleTable[i][j])))
-
+                            if (sampleTable[i][j] != '.' && (!squareHash.Add(sampleTable[i][j])))
                                 return false;
                         }
                     }
